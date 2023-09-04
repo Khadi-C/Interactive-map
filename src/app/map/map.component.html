@@ -4,8 +4,13 @@
     <div class="left-column">
         <svg width="1366" height="768" xmlns="http://www.w3.org/2000/svg">
             <image href="https://innovsandbox.space/img/world-map.svg" width="1366" height="768" />
+            <g>
+                <path *ngFor="let country of countries" [attr.d]="country.path"
+                    (mouseenter)="onCountryMouseEnter(country)" (mouseleave)="onCountryMouseLeave()"
+                    (click)="onCountryClick(country)"></path>
+            </g>
         </svg>
-        <app-map></app-map>
+
     </div>
 
     <div class="right-column">
@@ -15,6 +20,8 @@
             <p><strong>Capital:</strong> {{ this.selectedCountryInfo.capital }}</p>
             <p><strong>Region:</strong> {{ this.selectedCountryInfo.region }}</p>
             <p><strong>Income Level:</strong> {{ this.selectedCountryInfo.incomeLevel }}</p>
+            <p><strong>Latitude:</strong> {{ this.selectedCountryInfo.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ this.selectedCountryInfo.longitude }}</p>
         </div>
     </div>
 

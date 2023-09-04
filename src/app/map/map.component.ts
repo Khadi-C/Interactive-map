@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -7,11 +7,12 @@ import { ApiService } from '../api.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent {
+  @Input() countries: any[] = [];
   selectedCountryInfo: any = {};
 
   constructor(private apiService: ApiService) { }
 
-  ngOnIt(): void {
+  ngOnInit(): void {
     this.fetchCountryInfo();
   }
 
@@ -27,4 +28,15 @@ export class MapComponent {
     });
   }
 
+  onCountryMouseEnter(country: any) {
+    console.log(`Mouse entered country: ${country.name}`);
+  }
+
+  onCountryMouseLeave() {
+    console.log('Mouse left country');
+  }
+
+  onCountryClick(country: any) {
+    console.log(`Clicked on country: ${country.name}`);
+  }
 }
