@@ -1,28 +1,15 @@
-<h2>Map of the World</h2>
-
-<div class="layout-container">
+<div class="container">
     <div class="left-column">
-        <svg width="1366" height="768" xmlns="http://www.w3.org/2000/svg">
-            <image href="https://innovsandbox.space/img/world-map.svg" width="1366" height="768" />
-            <g>
-                <path *ngFor="let country of countries" [attr.d]="country.path"
-                    (mouseenter)="onCountryMouseEnter(country)" (mouseleave)="onCountryMouseLeave()"
-                    (click)="onCountryClick(country)"></path>
-            </g>
-        </svg>
-
+        <img src="assets/world-map.svg" (click)="onCountryClick($event)" />
     </div>
-
     <div class="right-column">
-        <div class="country-details">
-            <h2>Country Details</h2>
-            <p><strong>Country Name:</strong> {{ this.selectedCountryInfo.name }}</p>
-            <p><strong>Capital:</strong> {{ this.selectedCountryInfo.capital }}</p>
-            <p><strong>Region:</strong> {{ this.selectedCountryInfo.region }}</p>
-            <p><strong>Income Level:</strong> {{ this.selectedCountryInfo.incomeLevel }}</p>
-            <p><strong>Latitude:</strong> {{ this.selectedCountryInfo.latitude }}</p>
-            <p><strong>Longitude:</strong> {{ this.selectedCountryInfo.longitude }}</p>
+        <div *ngIf="countryInfo">
+            <p>Name: {{ countryInfo.name }}</p>
+            <p>Capital: {{ countryInfo.capital }}</p>
+            <p>Region: {{ countryInfo.region }}</p>
+            <p>Income Level: {{ countryInfo.incomeLevel }}</p>
+            <p>Latitude: {{ countryInfo.latitude }}</p>
+            <p>Longitude: {{ countryInfo.longitude }}</p>
         </div>
     </div>
-
 </div>

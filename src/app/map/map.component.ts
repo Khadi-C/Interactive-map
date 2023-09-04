@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -7,36 +7,23 @@ import { ApiService } from '../api.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent {
-  @Input() countries: any[] = [];
-  selectedCountryInfo: any = {};
+  countryInfo!: { name: any; capital: any; region: any; incomeLevel: any; latitude: any; longitude: any; };
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit(): void {
-    this.fetchCountryInfo();
-  }
-
-  fetchCountryInfo() {
-    const countryCode = 'au';
-    this.apiService.getCountryInfo(countryCode).subscribe({
-      next: (data) => {
-        this.selectedCountryInfo = data;
-      },
-      error: (error) => {
-        console.error('Error fetching country info:', error);
+  onCountryClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    if (clickedElement.tagName === 'path') {
+      const countryName = clickedElement.getAttribute('data-name');
+      if (countryName) {
+        this.getCountryDetails(countryName);
       }
+    }
+  }
+
+  getCountryDetails(name: string) {
+    this.apiService.getCountryInfo(name).subscribe(info => {
+      this.countryInfo = info;
     });
-  }
-
-  onCountryMouseEnter(country: any) {
-    console.log(`Mouse entered country: ${country.name}`);
-  }
-
-  onCountryMouseLeave() {
-    console.log('Mouse left country');
-  }
-
-  onCountryClick(country: any) {
-    console.log(`Clicked on country: ${country.name}`);
   }
 }
