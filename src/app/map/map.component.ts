@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -6,63 +6,23 @@ import { ApiService } from '../api.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit {
-  countryInfo: { name: any; capital: any; region: any; incomeLevel: any; latitude: any; longitude: any; } | null = null;
-  countries: any[] = [];
+export class MapComponent implements OnInit {
+  country: any;
 
   constructor(private apiService: ApiService) { }
 
-  ngAfterViewInit() {
-    this.addEventListeners();
-  }
+  ngOnInit(): void { }
 
-  addEventListeners() {
-    const paths = document.querySelectorAll<SVGElement>('path');
-
-    paths.forEach(path => {
-      path.addEventListener('mouseover', (event) => {
-        const countryName = path.getAttribute('name');
-        if (countryName) {
-          this.getCountryDetails(countryName);
-        }
-        event.stopPropagation();
-      });
-
-      path.addEventListener('mouseout', () => {
-        path.style.fill = '';
-      });
+  onCountrySelected(countryCode: string): void {
+    this.apiService.getCountryInfo(countryCode).subscribe(data => {
+      this.country = {
+        name: data[1][0].name,
+        capital: data[1][0].capitalCity,
+        region: data[1][0].region.value,
+        incomeLevel: data[1][0].incomeLevel.value,
+        latitude: data[1][0].latitude,
+        longitude: data[1][0].longitude
+      };
     });
-  }
-
-  getCountryDetails(name: string) {
-    this.apiService.getCountryInfo(name).subscribe(info => {
-      this.countryInfo = info;
-    });
-  }
-
-  onCountryMouseEnter(event: MouseEvent, country: any) {
-    const hoveredElement = event.target as HTMLElement;
-    if (hoveredElement.tagName === 'path') {
-      hoveredElement.style.fill = 'pink';
-      this.getCountryDetails(country.name);
-    }
-  }
-
-  onCountryMouseLeave() {
-    const hoveredPaths = document.querySelectorAll<SVGElement>('path:hover');
-    hoveredPaths.forEach(path => {
-      path.style.fill = '';
-    });
-    this.countryInfo = null;
-  }
-
-  onCountryClick(event: MouseEvent) {
-    const clickedElement = event.target as HTMLElement;
-    if (clickedElement.tagName === 'path') {
-      const countryName = clickedElement.getAttribute('name');
-      if (countryName) {
-        this.getCountryDetails(countryName);
-      }
-    }
   }
 }

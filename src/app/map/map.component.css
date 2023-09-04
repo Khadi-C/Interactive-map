@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+}
+
+.left-column {
+    width: 50%;
+}
+
+.right-column {
+    width: 50%;
+}
