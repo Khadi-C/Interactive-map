@@ -14,14 +14,18 @@ export class ApiService {
       map(response => {
         const countries = response[1];
         const country = countries.find((c: { name: string; }) => c.name === name);
-        return {
-          name: country.name,
-          capital: country.adminregion.value,
-          region: country.region.value,
-          incomeLevel: country.incomeLevel.value,
-          latitude: country.latitude,
-          longitude: country.longitude
-        };
+        if (country) {
+          return {
+            name: country.name,
+            capital: country.capitalCity,
+            region: country.region.value,
+            incomeLevel: country.incomeLevel.value,
+            latitude: country.latitude,
+            longitude: country.longitude
+          };
+        } else {
+          return null;
+        }
       })
     );
   }

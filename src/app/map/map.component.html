@@ -1,6 +1,12 @@
 <div class="container">
     <div class="left-column">
-        <img src="assets/world-map.svg" (click)="onCountryClick($event)" />
+        <svg (click)="onCountryClick($event)" width="1366" height="768">
+            <image href="assets/world-map.svg" width="1366" height="768" />
+            <g>
+                <path *ngFor="let country of countries" [attr.d]="country.path"
+                    (mouseover)="onCountryMouseEnter($event, country)" (mouseout)="onCountryMouseLeave()"></path>
+            </g>
+        </svg>
     </div>
     <div class="right-column">
         <div *ngIf="countryInfo">
