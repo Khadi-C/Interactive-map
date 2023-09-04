@@ -29,7 +29,7 @@ export class MapComponent implements AfterViewInit {
       });
 
       path.addEventListener('mouseout', () => {
-
+        path.style.fill = '';
       });
     });
   }
