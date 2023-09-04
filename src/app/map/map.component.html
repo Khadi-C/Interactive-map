@@ -757,11 +757,31 @@
         </svg>
     </div>
     <div class="right-column">
-        <p>Name: {{ country?.name }}</p>
-        <p>Capital: {{ country?.capital }}</p>
-        <p>Region: {{ country?.region }}</p>
-        <p>Income Level: {{ country?.incomeLevel }}</p>
-        <p>Latitude: {{ country?.latitude }}</p>
-        <p>Longitude: {{ country?.longitude }}</p>
+        <table>
+            <tr>
+                <td>Country:</td>
+                <td>{{ country?.name }}</td>
+            </tr>
+            <tr>
+                <td>Capital:</td>
+                <td>{{ country?.capital }}</td>
+            </tr>
+            <tr>
+                <td>Region:</td>
+                <td>{{ country?.region }}</td>
+            </tr>
+            <tr>
+                <td>Income Level:</td>
+                <td>{{ country?.incomeLevel }}</td>
+            </tr>
+            <tr>
+                <td>Latitude:</td>
+                <td>{{ country?.latitude }}</td>
+            </tr>
+            <tr>
+                <td>Longitude:</td>
+                <td>{{ country?.longitude }}</td>
+            </tr>
+        </table>
     </div>
 </div>

@@ -25,4 +25,9 @@ export class MapComponent implements OnInit {
       };
     });
   }
+  darkMode = false;
+
+  toggleDarkMode() {
+    this.darkMode = !this.darkMode;
+  }
 }

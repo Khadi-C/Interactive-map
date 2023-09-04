@@ -3,9 +3,36 @@
 }
 
 .left-column {
-    width: 50%;
+    width: 100%;
+}
+
+.left-column path {
+    transition: fill 0.3s;
+}
+
+.left-column path:hover {
+    fill: deeppink;
 }
 
 .right-column {
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Futura', Arial, sans-serif;
+}
+
+.right-column table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.right-column table tr,
+.right-column table td {
+    border: 2px solid black;
+    padding: 8px 12px;
+}
+
+.right-column table td:first-child {
+    font-weight: bold;
 }
