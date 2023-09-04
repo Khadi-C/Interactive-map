@@ -7,6 +7,8 @@ import { ApiService } from '../api.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent {
+  selectedCountryInfo: any = {};
+
   constructor(private apiService: ApiService) { }
 
   ngOnIt(): void {
@@ -15,14 +17,14 @@ export class MapComponent {
 
   fetchCountryInfo() {
     const countryCode = 'au';
-    this.apiService.getCountryInfo(countryCode).subscribe(
-      (data) => {
-        console.log(data);
+    this.apiService.getCountryInfo(countryCode).subscribe({
+      next: (data) => {
+        this.selectedCountryInfo = data;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching country info:', error);
       }
-    );
+    });
   }
 
 }

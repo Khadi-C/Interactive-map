@@ -1,5 +1,21 @@
-<div>
-    <svg width="1366" height="768" xmlns="http://www.w3.org/2000/svg">
-        <image href="https://innovsandbox.space/img/world-map.svg" width="1366" height="768" />
-    </svg>
+<h2>Map of the World</h2>
+
+<div class="layout-container">
+    <div class="left-column">
+        <svg width="1366" height="768" xmlns="http://www.w3.org/2000/svg">
+            <image href="https://innovsandbox.space/img/world-map.svg" width="1366" height="768" />
+        </svg>
+        <app-map></app-map>
+    </div>
+
+    <div class="right-column">
+        <div class="country-details">
+            <h2>Country Details</h2>
+            <p><strong>Country Name:</strong> {{ this.selectedCountryInfo.name }}</p>
+            <p><strong>Capital:</strong> {{ this.selectedCountryInfo.capital }}</p>
+            <p><strong>Region:</strong> {{ this.selectedCountryInfo.region }}</p>
+            <p><strong>Income Level:</strong> {{ this.selectedCountryInfo.incomeLevel }}</p>
+        </div>
+    </div>
+
 </div>
